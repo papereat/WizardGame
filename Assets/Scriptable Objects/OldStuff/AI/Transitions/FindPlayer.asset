@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f820f96e57c02d841927e80da91c334e, type: 3}
+  m_Name: FindPlayer
+  m_EditorClassIdentifier: 
+  decision: {fileID: 11400000, guid: 7ee8eb89f31af784f9251a3665fe9be4, type: 2}
+  trueState: {fileID: 11400000, guid: d4d5c2fe5eae05f479947a24dbf5b874, type: 2}
+  falseState: {fileID: 11400000, guid: 6513638596cdf91419d2222fa93e61d5, type: 2}
