@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     #region  Public Var
+    public static PlayerManager CurrentPlayerManger;
     [Header("Refrences")]
+    public PlayerInputs playerInputs;
     public Rigidbody2D rb;
     public Animator animator;
 
@@ -15,13 +17,16 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     #region  Public Func
-    // Start is called before the first frame update
+    public void Awake()
+    {
+        CurrentPlayerManger=this;
+        playerInputs= new PlayerInputs();
+        playerInputs.Player_Map.Enable();
+    }
     void Start()
     {
-        
+        GameEvents.Current.onGatherSaveData+=GatherPlayerSaveData;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(canMove)
@@ -32,37 +37,21 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     #region  Private Func
+    void GatherPlayerSaveData()
+    {
+
+    }
     void Movment()
     {
         Vector2 mov=new Vector2();
+        //transform.position=new Vector3(transform.position.x,transform.position.y,transform.position.y);
+        mov=new Vector2(playerInputs.Player_Map.Horizontal.ReadValue<float>(),playerInputs.Player_Map.Verticle.ReadValue<float>());
 
-        if(Input.GetKey(KeyCode.W))
-        {
-            mov=new Vector2(0,1);
-            animator.SetInteger("Direction",3);
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            mov= new Vector2(0,-1);
-            animator.SetInteger("Direction",0);
-
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            mov= new Vector2(-1,0);
-            animator.SetInteger("Direction",2);
-
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            mov= new Vector2(1,0);
-            animator.SetInteger("Direction",1);
-
-        }
+        
 
         animator.SetBool("Running",mov!=Vector2.zero);
 
-        rb.velocity=mov*movmenetSpeed;
+        rb.velocity=mov.normalized*movmenetSpeed;
     }
     #endregion
 
